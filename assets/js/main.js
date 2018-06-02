@@ -1,3 +1,5 @@
+function randomNumber (start, end) { return Phaser.Math.Between(start, end) }
+function random (array) { return array[Math.floor(Math.random() * array.length)] }
 
 // funcao de carregar as imagens e outros recursos
 const preload = function () {
@@ -114,26 +116,31 @@ function update () {
         hamtaro.x += 3
         hamtaro.anims.play('direita', true)
     } else if (cursors.up.isDown) {
-        hamtaro.y -= 2
+        hamtaro.y -= 3
+        hamtaro.anims.play('cima', true)
     } else if (cursors.down.isDown) {
-        hamtaro.y += 2
+        hamtaro.y += 3
+        hamtaro.anims.play('baixo', true)
+    } else {
+        hamtaro.anims.play('parado', true)
     }
+    
 }
 
 function principal () {
-    var largura = 500
-    var altura = 500
+    var largura = window.innerWidth
+    var altura = window.innerHeight
     // cria uma variável com as configurações do jogo
     var conf = {
         type: Phaser.AUTO,
         width: largura,
         height: altura,
         pixelArt: true,
-        backgroundColor: 'blue',
+        backgroundColor: '#808080',
         physics: {
             default: 'arcade',
             arcade: {
-                gravity: { y: 200 }
+                gravity: { y: 0 }
             }
         },
         scene: {
